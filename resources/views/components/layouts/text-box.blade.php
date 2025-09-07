@@ -62,18 +62,18 @@
     @else
         @php
             $fgBoxClasses = [
-                'ver-2' => 'transform -translate-x-4 lg:translate-y-2',
-                'ver-3' => 'transform translate-x-4 lg:translate-y-2',
+                'ver-2' => 'transform lg:-translate-x-4 lg:translate-y-2',
+                'ver-3' => 'transform lg:translate-x-4 lg:translate-y-2',
             ][$variant];
 
             $bgBoxClasses = [
-                'ver-2' => 'transform -translate-x-2 lg:-translate-y-2',
-                'ver-3' => 'transform translate-x-2 lg:-translate-y-2',
+                'ver-2' => 'transform lg:-translate-x-2 lg:-translate-y-2',
+                'ver-3' => 'transform lg:translate-x-2 lg:-translate-y-2',
             ][$variant];
         @endphp
         <div class="relative w-full max-w-4xl lg:w-[1042px]">
-            <div class="absolute inset-0 {{ $bgBoxClasses }} rounded-3xl lg:rounded-[60px] border-4" style="border-color: #0ABAB5;"></div>
-            <div class="relative flex items-center justify-center {{ $fgBoxClasses }} rounded-3xl lg:rounded-[60px] border-4 p-6 md:p-8 min-h-[200px]" style="border-color: #056360; background-color: transparent;">
+            <div class="absolute inset-0 -inset-y-4 translate-y-2 lg:inset-0 {{ $bgBoxClasses }} rounded-3xl lg:rounded-[60px] border-4" style="border-color: #0ABAB5;"></div>
+            <div class="relative flex items-center justify-center translate-y-2 {{ $fgBoxClasses }} rounded-3xl lg:rounded-[60px] border-4 p-6 md:p-8 min-h-[200px]" style="border-color: #056360; background-color: transparent;">
                 <div class="font-poppins text-center font-light text-lg md:text-lg leading-8" style="color: #056360;">
                     {{ $slot }}
                 </div>
