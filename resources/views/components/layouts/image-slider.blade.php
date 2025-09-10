@@ -74,7 +74,7 @@
             x-text="members[currentIndex].description"
             class="text-xl md:text-2xl font-light leading-8 text-center"
             style="color: #056360;"
-            x-transition:opacity.duration.500ms
+            x-transition:opacity.duration.1000ms
             ></p>
             </div>
             </div>

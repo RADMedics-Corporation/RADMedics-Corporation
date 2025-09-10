@@ -4,10 +4,9 @@
         'ver-1' => 'flex justify-center items-center w-full',
         'ver-2' => 'flex items-center justify-center w-full',
         'ver-3' => 'flex items-center justify-center w-full',
-        'ver-4' => 'flex items-center justify-center w-full',
-        'ver-5' => 'flex items-center justify-center w-full',
+        'ver-4' => 'w-full h-full justify-center',
+        'ver-5' => 'w-full h-full justify-center',
     ];
-    $boxSizeClass = 'w-[97%] h-[97%]';
 @endphp
 
 {{--
@@ -29,10 +28,10 @@
 
 <div class="{{ $variantClasses[$variant] ?? $variantClasses['ver-1'] }} px-4 py-8">
     @if ($variant === 'ver-1')
-        <div class="relative w-full max-w-5xl p-2 min-h-[580px] sm:min-h-[420px] lg:min-h-[320px] flex items-center justify-center">
-            <div class="absolute inset-x-0 bottom-2 h-full rounded-3xl lg:rounded-[60px] border-4" style="border-color: #0ABAB5;"></div>
-            <div class="absolute inset-x-0 top-2 h-full flex items-center justify-center rounded-3xl lg:rounded-[60px] border-4 p-6 md:p-10" style="border-color: #056360;">
-                <div class="font-poppins text-center font-light text-xl md:text-2xl leading-8" style="color: #056360;">
+        <div class="relative w-full max-w-5xl">
+            <div class="absolute inset-0 -inset-y-4 rounded-3xl lg:rounded-[60px] border-4 transform translate-y-2" style="border-color: #0ABAB5;"></div>
+            <div class="relative flex items-center justify-center rounded-3xl lg:rounded-[60px] border-4 p-6 md:p-10 transform translate-y-2 min-h-[200px]" style="border-color: #056360; background-color: transparent;">
+                <div class="font-poppins text-center font-light text-xl md:text-lg leading-8" style="color: #056360;">
                     {{ $slot }}
                 </div>
             </div>
@@ -46,29 +45,36 @@
                 ? 'color: #FFF;'
                 : 'color: #056360;';
         @endphp
-        <div class="relative w-full max-w-sm lg:w-[345px]">
-            <div class="flex items-center justify-center rounded-3xl lg:rounded-[60px] p-8 md:p-10 min-h-[250px] lg:min-h-[305px] w-full h-full @if($variant === 'ver-5') border-4 @endif" style="{{ $boxStyle }}">
-                <div class="font-poppins text-center font-light text-xl md:text-2xl leading-8" style="{{ $textStyle }}">
-                    {{ $slot }}
+        <div class="relative w-full h-full max-w-sm lg:w-[345px] lg:h-[400px]">
+            <div class="flex items-center justify-center rounded-3xl lg:rounded-[60px] p-8 md:p-10 w-full h-full @if($variant === 'ver-5') border-4 @endif" style="{{ $boxStyle }}">
+                <div class="text-center">
+                    @if (isset($title))
+                        <h3 class="font-poppins font-semibold text-lg md:text-2xl mb-2" style="{{ $textStyle }}">
+                            {{ $title }}
+                        </h3>
+                    @endif
+                    <div class="font-poppins font-light text-base md:text-lg leading-relaxed" style="{{ $textStyle }}">
+                        {{ $slot }}
+                    </div>
                 </div>
             </div>
         </div>
     @else
         @php
             $fgBoxClasses = [
-                'ver-2' => 'absolute top-2 right-2 w-full h-full',
-                'ver-3' => 'absolute top-2 left-2 w-full h-full',
+                'ver-2' => 'transform lg:-translate-x-4 lg:translate-y-2',
+                'ver-3' => 'transform lg:translate-x-4 lg:translate-y-2',
             ][$variant];
 
             $bgBoxClasses = [
-                'ver-2' => 'absolute bottom-2 left-2 w-full h-full',
-                'ver-3' => 'absolute bottom-2 right-2 w-full h-full',
+                'ver-2' => 'transform lg:-translate-x-2 lg:-translate-y-2',
+                'ver-3' => 'transform lg:translate-x-2 lg:-translate-y-2',
             ][$variant];
         @endphp
-        <div class="relative w-full max-w-4xl lg:w-[1042px] min-h-[580px] sm:min-h-[420px] lg:min-h-[320px] p-2">
-            <div class="{{ $bgBoxClasses }} rounded-3xl lg:rounded-[60px] border-4" style="border-color: #0ABAB5;"></div>
-            <div class="{{ $fgBoxClasses }} flex items-center justify-center rounded-3xl lg:rounded-[60px] border-4 p-6 md:p-8" style="border-color: #056360;">
-                <div class="font-poppins text-center font-light text-xl md:text-2xl leading-8" style="color: #056360;">
+        <div class="relative w-full max-w-4xl lg:w-[1042px]">
+            <div class="absolute inset-0 -inset-y-4 translate-y-2 lg:inset-0 {{ $bgBoxClasses }} rounded-3xl lg:rounded-[60px] border-4" style="border-color: #0ABAB5;"></div>
+            <div class="relative flex items-center justify-center translate-y-2 {{ $fgBoxClasses }} rounded-3xl lg:rounded-[60px] border-4 p-6 md:p-8 min-h-[200px]" style="border-color: #056360; background-color: transparent;">
+                <div class="font-poppins text-center font-light text-lg md:text-lg leading-8" style="color: #056360;">
                     {{ $slot }}
                 </div>
             </div>

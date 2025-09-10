@@ -17,7 +17,7 @@
 <div class="font-poppins pt-32 sm:pt-32 px-4 sm:px-6 lg:px-8">
     <div class="max-w-screen-2xl mx-auto space-y-52 sm:space-y-48">
 
-    <section class="scroll-ani text-center space-y-12 opacity-0 translate-y-4 transition-all duration-[500ms] ease-in-out">
+    <section class="scroll-ani text-center space-y-12 opacity-0 translate-y-4 transition-all duration-[1000ms] ease-in-out">
             <h1 class="text-4xl sm:text-5xl lg:text-6xl font-semibold uppercase tracking-wide text-[#0ABAB5]">
                 ABOUT US
             </h1>
@@ -43,7 +43,7 @@
             </div>
         </section>
 
-    <section class="scroll-ani flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-16 xl:gap-24 opacity-0 translate-y-4 transition-all duration-[500ms] ease-in-out">
+    <section class="scroll-ani flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-16 xl:gap-24 opacity-0 translate-y-4 transition-all duration-[1000ms] ease-in-out">
             <div class="w-full lg:w-2/5">
                 <x-layouts.image-box variant="ver-3" :image="$landscape_1_Image"/>
             </div>
@@ -57,7 +57,7 @@
             </div>
         </section>
 
-    <section class="scroll-ani flex flex-col lg:flex-row items-center gap-12 lg:gap-16 xl:gap-24 opacity-0 translate-y-4 transition-all duration-[500ms] ease-in-out">
+    <section class="scroll-ani flex flex-col lg:flex-row items-center gap-12 lg:gap-16 xl:gap-24 opacity-0 translate-y-4 transition-all duration-[1000ms] ease-in-out">
             <div class="w-full lg:w-2/5">
                 <x-layouts.image-box variant="ver-4" :image="$portrait_2_Image"/>
             </div>
@@ -71,23 +71,41 @@
             </div>
         </section>
 
-    <section class="scroll-ani text-center space-y-16 opacity-0 translate-y-4 transition-all duration-[500ms] ease-in-out">
+    <section class="scroll-ani text-center space-y-4 opacity-0 translate-y-4 transition-all duration-[1000ms] ease-in-out">
             <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold uppercase tracking-wide text-[#0ABAB5]">
             OUR CORE VALUES
             </h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 lg:gap-x-12 xl:gap-x-16 gap-y-4">
-            <x-layouts.text-box variant="ver-4">We uphold the highest ethical standards, ensuring integrity in all our actions and decisions.</x-layouts.text-box>
-            <x-layouts.text-box variant="ver-5">We prioritize swift and efficient responses to emergency situations, minimizing response times to save lives.</x-layouts.text-box>
-            <x-layouts.text-box variant="ver-4">We approach every emergency with the utmost professionalism, delivering care with empathy and expertise.</x-layouts.text-box>
-            <x-layouts.text-box variant="ver-5">We continuously apply evidence-based practices, leveraging critical thinking to make informed medical decisions.</x-layouts.text-box>
-            <x-layouts.text-box variant="ver-4">We foster a collaborative environment, where effective communication among our teams leads to seamless and coordinated care for patients.</x-layouts.text-box>
-            <x-layouts.text-box variant="ver-5">We invest in the ongoing training and development of our prehospital care providers, ensuring they are highly skilled and competent in their life-saving roles.</x-layouts.text-box>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 lg:gap-x-12 xl:gap-x-16 gap-y-2">
+                <x-layouts.text-box variant="ver-4">
+                    <x-slot:title>Ethical Behavior</x-slot>
+                    We uphold the highest ethical standards, ensuring integrity in all our actions and decisions.
+                </x-layouts.text-box>
+                <x-layouts.text-box variant="ver-5">
+                    <x-slot:title>Timely Response to Emergency Services</x-slot>
+                    We prioritize swift and efficient responses to emergency situations, minimizing response times to save lives.
+                </x-layouts.text-box>
+                <x-layouts.text-box variant="ver-4">
+                    <x-slot:title>Professionalism in Emergency Care</x-slot>
+                    We approach every emergency with the utmost professionalism, delivering care with empathy and expertise.
+                </x-layouts.text-box>
+                <x-layouts.text-box variant="ver-5">
+                    <x-slot:title>Critical Thinking Based on Evidence-Based Practice</x-slot>
+                    We continuously apply evidence-based practices, leveraging critical thinking to make informed medical decisions.
+                </x-layouts.text-box>
+                <x-layouts.text-box variant="ver-4">
+                    <x-slot:title>Teamwork and Effective Communication During Emergency Care</x-slot>
+                    We foster a collaborative environment, where effective communication among our teams leads to seamless and coordinated care for patients.
+                </x-layouts.text-box>
+                <x-layouts.text-box variant="ver-5">
+                    <x-slot:title>Competenct and Well-Trained Prehospital Care Provider</x-slot>
+                    We invest in the ongoing training and development of our prehospital care providers, ensuring they are highly skilled and competent in their life-saving roles.
+                </x-layouts.text-box>
             </div>
         </section>
 
     </div>
 
-    <section class="scroll-ani text-center space-y-16 pt-32 sm:pt-48 pb-24 sm:pb-32 opacity-0 translate-y-4 transition-all duration-[500ms] ease-in-out">
+    <section class="scroll-ani text-center space-y-16 pt-32 sm:pt-48 pb-24 sm:pb-32 opacity-0 translate-y-4 transition-all duration-[1000ms] ease-in-out">
         <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold uppercase tracking-wide text-[#0ABAB5]">
                 MEET THE TEAM
@@ -108,7 +126,7 @@
         const observerOptions = {
             root: null,
             rootMargin: '0px',
-            threshold: 0.35
+            threshold: 0.15
         };
 
         const observer = new IntersectionObserver((entries, observer) => {
