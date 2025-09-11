@@ -10,7 +10,7 @@ Route::get('/', function () {
 })->name('home');
 
 // Public informational pages
-Route::view('/landing-page', 'landing-page')->name('landing-page');
+Route::view('/home', 'landing-page')->name('landing-page');
 Route::view('/about', 'pages.about')->name('about');
 Route::view('/courses', 'pages.courses')->name('courses');
 Route::view('/updates', 'pages.updates')->name('updates');
