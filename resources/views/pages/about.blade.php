@@ -24,7 +24,7 @@
             <x-layouts.image-box variant="ver-1" :images="$galleryImages"/>
             <div class="max-w-5xl mx-auto">
                 <x-layouts.text-box variant="ver-1">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                    RADMEDICS Corporation is a healthcare education organization based in Mandaluyong City dedicated to developing competent emergency medical professionals through quality education and training in Emergency Medical Services (EMS). Established in 2022, the organization focuses on strengthening pre-hospital care by equipping aspiring responders with the knowledge, practical skills, and professional values needed to deliver effective and compassionate emergency medical care.                
                 </x-layouts.text-box>
             </div>
         </section>
@@ -38,7 +38,7 @@
                     WHAT WE DO
                 </h2>
                 <x-layouts.text-box variant="ver-2">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                    RADMEDICS Corporation provides specialized EMS training programs designed to prepare individuals for real-world emergency response. Through evidence-based instruction, hands-on learning, and community engagement initiatives, the organization aims to improve emergency preparedness, support aspiring EMS professionals, and contribute to the advancement of pre-hospital care in the community.
                 </x-layouts.text-box>
             </div>
         </section>

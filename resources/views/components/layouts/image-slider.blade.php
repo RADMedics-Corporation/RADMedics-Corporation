@@ -13,6 +13,12 @@
             'title' => 'EMS Clinical Practice Director/Co-owner',
             'description' => 'As the EMS Clinical Practice Director and Co-owner, Rhoderick Shih-Montevilla provides leadership in clinical standards, training, and overall direction of emergency medical services operations within the organization.'
         ],
+        [
+            'image' => '/images/Doc-Romeo.jpg',
+            'name' => 'Romeo Bangasan',
+            'title' => 'EMS Clinical Practice Director/Co-owner',
+            'description' => 'Romeo Bangasan is a Filipino nurse-educator and academician affiliated with the Emergency Medical Care Department of Imam Abdulrahman Bin Faisal University. As an EMS educator and advocate, he works to advance prehospital care through education, training development, and EMS quality improvement initiatives.'
+        ]
     ];
 @endphp
 
