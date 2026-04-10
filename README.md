@@ -125,4 +125,4 @@ This project is licensed under the MIT License.
 
 ## Contact
 
-For questions or support, please open an issue or contact the maintainer.
+For questions or support, please open an issue or contact the maintainers.
