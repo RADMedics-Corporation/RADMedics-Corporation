@@ -16,7 +16,7 @@
         [
             'image' => '/images/Doc-Romeo.jpg',
             'name' => 'Romeo Bangasan',
-            'title' => 'EMS Clinical Practice Director/Co-owner',
+            'title' => 'EMS Training Director',
             'description' => 'Romeo Bangasan is a Filipino nurse-educator and academician affiliated with the Emergency Medical Care Department of Imam Abdulrahman Bin Faisal University. As an EMS educator and advocate, he works to advance prehospital care through education, training development, and EMS quality improvement initiatives.'
         ]
     ];
