@@ -10,7 +10,7 @@
         [
             'image' => '/images/Doc-Rhoderick.jpg',
             'name' => 'Rhoderick Shih-Montevilla',
-            'title' => 'EMS Clinical Practice Director/Co-owner',
+            'title' => 'EMS Training Director',
             'description' => 'As the EMS Clinical Practice Director and Co-owner, Rhoderick Shih-Montevilla provides leadership in clinical standards, training, and overall direction of emergency medical services operations within the organization.'
         ],
         [
