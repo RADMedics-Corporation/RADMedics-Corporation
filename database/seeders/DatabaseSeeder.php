@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             'role_id' => $role->id,
         ]);
     }
+
     /**
      * Seed the application's database.
      */
