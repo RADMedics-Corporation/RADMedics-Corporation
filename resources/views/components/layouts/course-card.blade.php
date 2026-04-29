@@ -5,12 +5,17 @@
     'image' => null,
     'imageAlt' => null,
     'mode' => null, // f2f | hybrid | online
+    'role' => null,
+    'courseSlug' => null,
 ])
 
 @php
     $modeKey = $mode ? strtolower(trim($mode)) : null;
     $modeLabel = null;
     $modeColor = null;
+    $roleKey = $role ? strtolower(trim($role)) : null;
+    $buttonText = 'Enroll';
+    $buttonHref = url('/login');
 
     switch($modeKey) {
         case 'f2f':
@@ -30,6 +35,22 @@
             $modeColor = 'bg-cyan-600';
             break;
     }
+
+    switch($role) {
+        case 'super_admin':
+        case 'admin':
+        case 'instructor':
+            $buttonText = 'Manage';
+            $buttonHref = url('/manage/courses?course=' . $courseSlug);
+            break;
+        case 'student':
+        case 'temporary':
+            $buttonText = 'Enroll';
+            $buttonHref = url('/courses/' . $courseSlug);
+            break;
+    }
+
+
 @endphp
 
 <div {{ $attributes->merge(['class' => "border-2 border-[#0ABAB5] rounded-lg p-6 flex flex-col bg-white shadow-sm hover:shadow-md transition-shadow duration-300 $cardClass"]) }}>
@@ -55,8 +76,8 @@
             type="outline"
             color="tiffany-blue"
             size="sm"
-            text="Enroll Now!"
-            href="{{ url('/contact') }}"
+            text="{{ $buttonText }}"
+            href="{{ $buttonHref }}"
         />
         @if($modeLabel)
             <span class="flex items-center gap-1 text-[11px] font-medium tracking-wide text-gray-500">

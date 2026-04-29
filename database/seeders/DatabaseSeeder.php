@@ -32,5 +32,7 @@ class DatabaseSeeder extends Seeder
         $this->create('instructor');
         $this->create('student');
         $this->create('temporary');
+
+        $this->command->info("Roles and users seeded successfully.");
     }
 }

@@ -13,14 +13,8 @@
                         {{ auth()->user()->role?->name === 'super_admin' ? 'bg-purple-100 text-purple-700' :
                            (auth()->user()->role?->name === 'admin' ? 'bg-blue-100 text-blue-700' :
                            'bg-green-100 text-green-700') }}">
-                        {{ auth()->user()->role?->label ?? auth()->user()->role?->name ?? 'No Role' }}
+                        {{ auth()->user()->role?->name }}
                     </span>
-
-                    <a href="{{ route('login') }}"
-                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                       class="text-red-600 hover:text-red-700 text-sm font-medium">
-                        Logout
-                    </a>
                 </div>
             </div>
         </nav>
@@ -60,8 +54,8 @@
                 <div class="bg-white dark:bg-gray-800 rounded-2xl shadow p-8">
                     <h2 class="text-3xl font-semibold mb-6">Student Dashboard</h2>
                     <p class="text-gray-600">Welcome to your learning portal.</p>
+                    <livewire:course-list :role="auth()->user()->role->name" />
                 </div>
-
             @else
                 <!-- Default / Medic / Temporary -->
                 <div class="bg-white dark:bg-gray-800 rounded-2xl shadow p-8">
