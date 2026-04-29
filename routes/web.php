@@ -20,7 +20,13 @@ Route::view('/faqs', 'pages.faqs')->name('faqs');
 Route::view('/privacy-policy', 'pages.privacy-policy')->name('privacy-policy');
 Route::view('/terms-of-service', 'pages.terms-of-service')->name('terms-of-service');
 
-Route::post('/logout', function () { return view('pages.under-construction'); })->name('logout');
+Route::post('/logout', function () {
+    Auth::guard('web')->logout();
+    Session::invalidate();
+    Session::regenerateToken();
+
+    return redirect('/');
+})->name('logout');
 
 Route::get('/login', function () {
     if (auth()->check()) {
