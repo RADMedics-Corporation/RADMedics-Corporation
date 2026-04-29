@@ -3,6 +3,7 @@
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
+use App\Livewire\Auth\Login;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -19,13 +20,23 @@ Route::view('/faqs', 'pages.faqs')->name('faqs');
 Route::view('/privacy-policy', 'pages.privacy-policy')->name('privacy-policy');
 Route::view('/terms-of-service', 'pages.terms-of-service')->name('terms-of-service');
 
-// Temporary route for login page
-Route::view('/login', 'pages.login')->name('login');
+Route::post('/logout', function () { return view('pages.under-construction'); })->name('logout');
 
-// "Student", "Instructor", and "Admin" login buttons route here while feature is under construction
+Route::get('/login', function () {
+    if (auth()->check()) {
+        return redirect()->route('dashboard');
+    }
+    return view('pages.login');
+})->name('login');
+Route::post('/login', Login::class)->name('login.submit');
+
 Route::view('/under-construction', 'pages.under-construction')->name('under-construction');
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('pages.dashboard');
+    })->name('dashboard');
+
     Route::redirect('settings', 'settings/profile');
 
     Route::get('settings/profile', Profile::class)->name('settings.profile');
