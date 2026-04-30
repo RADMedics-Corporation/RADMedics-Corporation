@@ -20,10 +20,12 @@ COPY --from=composer:2.5 /usr/bin/composer /usr/bin/composer
 
 # 1. Composer deps (cache layer)
 COPY composer.json composer.lock ./
-RUN composer update --no-dev --prefer-dist --no-progress --no-interaction --optimize-autoloader
+
 # First pass: install dependencies without running Laravel's artisan-dependent composer scripts
 
-RUN COMPOSER_NO_DEV=1 composer install --no-dev --prefer-dist --no-progress --no-interaction --no-scripts --optimize-autoloader
+#RUN COMPOSER_NO_DEV=1 composer install --no-dev --prefer-dist --no-progress --no-interaction --no-scripts --optimize-autoloader
+
+RUN composer install --no-dev --optimize-autoloader --no-interaction
 
 # 2. Node deps (cache layer)
 COPY package.json package-lock.json* ./
