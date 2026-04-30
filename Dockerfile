@@ -4,10 +4,10 @@ LABEL org.opencontainers.image.source="https://github.com/your-org/your-repo" \
       maintainer="You <you@example.com>"
 
 # Install system dependencies (Node from Debian is OK for build-only use) & PHP extensions
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y \
     git curl unzip zip \
     libpng-dev libonig-dev libxml2-dev \
-    libjpeg-dev libfreetype6-dev libwebp-dev \
+    libjpeg-dev libjpeg62-turbo-dev libfreetype6-dev libwebp-dev \
     nodejs npm nginx \
     && docker-php-ext-configure gd --with-jpeg --with-freetype --with-webp \
     && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd \
