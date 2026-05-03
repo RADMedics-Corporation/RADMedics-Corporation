@@ -23,7 +23,7 @@
                 </p>
                 <!-- Buttons -->
                 <div class="w-full flex flex-col space-y-4 mb-6 max-w-xs">
-                    <a href="{{ route('under-construction') }}"
+                    <a href="{{ route('dashboard') }}"
                         class="w-full py-2 rounded-sm bg-blue-600 hover:bg-blue-700 text-white font-regular text-md text-center transition shadow">
                             Student
                     </a>
