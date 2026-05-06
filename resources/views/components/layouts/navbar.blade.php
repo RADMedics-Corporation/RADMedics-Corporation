@@ -35,7 +35,7 @@
                 $navItems = [
                     ['route' => 'landing-page', 'label' => 'HOME'],
                     ['route' => 'about', 'label' => 'ABOUT US'],
-                    ['route' => 'courses', 'label' => 'COURSES'],
+                    ['route' => 'offered-course', 'label' => 'COURSES'],
                     ['route' => 'updates', 'label' => 'UPDATES'],
                     ['route' => 'contact', 'label' => 'CONTACT'],
                 ];
@@ -88,7 +88,7 @@
                 $mobileNavItems = [
                     ['route' => 'landing-page', 'label' => 'HOME'],
                     ['route' => 'about', 'label' => 'ABOUT US'],
-                    ['route' => 'courses', 'label' => 'COURSES'],
+                    ['route' => 'offered-course', 'label' => 'COURSES'],
                     ['route' => 'updates', 'label' => 'UPDATES'],
                     ['route' => 'contact', 'label' => 'CONTACT'],
                     ['route' => 'login', 'label' => 'LOGIN'],
