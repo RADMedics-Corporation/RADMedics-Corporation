@@ -126,3 +126,10 @@ This project is licensed under the MIT License.
 ## Contact
 
 For questions or support, please open an issue or contact the maintainers.
+
+## TODO before full deployment:
+1. Remove `fakerphp/faker` package from prod and move it back to dev.
+```
+composer remove fakerphp/faker
+composer require --dev fakerphp/faker
+```
