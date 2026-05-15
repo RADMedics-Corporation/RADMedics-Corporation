@@ -12,7 +12,16 @@ class DatabaseSeeder extends Seeder
 {
     private function create(string $roleStr): void
     {
-        $role = Role::create(['name' => $roleStr]);
+        $role = Role::firstOrCreate(
+            ['name' => $roleStr]
+        );
+
+        $email = "{$roleStr}@example.com";
+
+        if (User::where('email', $email)->exists()) {
+            $this->command->info("User already exists: {$email}");
+            return;
+        }
 
         User::factory()->create([
             'name' => $roleStr,
