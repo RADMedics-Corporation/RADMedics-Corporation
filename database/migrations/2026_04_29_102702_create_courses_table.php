@@ -19,6 +19,7 @@ return new class extends Migration
             $table->enum('mode_of_learning', ['Online', 'F2F', 'Hybrid F2F'])
                   ->default('Online');
             $table->string('thumbnail')->nullable();        // file path only
+            $table->boolean('is_published')->default(false);
             $table->timestamp('published_at')->nullable();  // not published if null
             $table->timestamps();
             $table->softDeletes();
