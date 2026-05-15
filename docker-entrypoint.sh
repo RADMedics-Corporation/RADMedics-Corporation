@@ -42,6 +42,12 @@ else
   echo "Migrations failed; continuing with app startup." >&2
 fi
 
+if php artisan db:seed --force; then
+    echo "Seeding successfully."
+else
+    echo "Seeding failed" >&2
+fi
+
 # Rebuild caches
 php artisan config:cache || true
 php artisan route:cache || true
