@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\Role;
+use App\Models\UserProfile;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -18,17 +19,25 @@ class UserSeeder extends Seeder
 
         $email = "{$roleStr}@example.com";
 
-        if (User::where('email', $email)->exists()) {
-            $this->command->info("User already exists: {$email}");
-            return;
-        }
+        $user = User::firstOrCreate(
+            ['email' => $email],
+            [
+                'name' => $roleStr,
+                'email' => "{$roleStr}@example.com",
+                'password' => Hash::make('password'),
+                'role_id' => $role->id,
+            ]
+        );
 
-        User::factory()->create([
-            'name' => $roleStr,
-            'email' => "{$roleStr}@example.com",
-            'password' => Hash::make('password'),
-            'role_id' => $role->id,
-        ]);
+        UserProfile::firstOrCreate(
+            ['user_id' => $user->id],
+            [
+                'gender' => rand(0, 1) ? 'male' : 'female',
+                'phone' => '0912-345-6789',
+                'birthdate' => now()->subYears(rand(20, 40)),
+                'address' => "Mandaluyong City"
+            ]
+        );
     }
 
     /**

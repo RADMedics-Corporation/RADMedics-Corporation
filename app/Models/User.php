@@ -71,4 +71,9 @@ class User extends Authenticatable
     {
         return $this->role?->name === $roleName->value;
     }
+
+    public function profile()
+    {
+        return $this->hasOne(UserProfile::class);
+    }
 }

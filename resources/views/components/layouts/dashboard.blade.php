@@ -55,6 +55,10 @@
                    class="flex items-center gap-3 px-4 py-3 rounded-xl bg-cyan-50 text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-300 font-medium">
                     <span>Dashboard</span>
                 </a>
+                <a href="{{ route('profile.edit') }}"
+                   class="flex items-center gap-3 px-4 py-3 rounded-xl bg-cyan-50 text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-300 font-medium">
+                   <span>Edit Profile</span>
+               </a>
             </nav>
         </aside>
 

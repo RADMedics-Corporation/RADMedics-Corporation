@@ -43,6 +43,10 @@ Route::middleware(['auth'])->group(function () {
         return view('pages.dashboard');
     })->name('dashboard');
 
+    Route::get('/profile', function () {
+        return view('pages.profile');
+    })->name('profile.edit');
+
     Route::redirect('settings', 'settings/profile');
 
     Route::get('settings/profile', Profile::class)->name('settings.profile');
