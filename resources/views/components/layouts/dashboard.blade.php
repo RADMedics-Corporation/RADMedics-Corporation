@@ -54,11 +54,6 @@
                 <a href="{{ route('dashboard') }}"
                    class="flex items-center gap-3 px-4 py-3 rounded-xl bg-cyan-50 text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-300 font-medium">
                     <span>Dashboard</span>
-                </a>
-                <a href="{{ route('profile.edit') }}"
-                   class="flex items-center gap-3 px-4 py-3 rounded-xl bg-cyan-50 text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-300 font-medium">
-                   <span>Edit Profile</span>
-               </a>
             </nav>
         </aside>
 
@@ -68,18 +63,70 @@
             <header class="h-16 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 px-8 flex items-center justify-between">
                 <h2 class="text-xl font-semibold text-gray-800 dark:text-white">Dashboard</h2>
 
-                <div class="flex items-center gap-4">
-                    <span class="text-sm">{{ auth()->user()->name }}</span>
-                    <span class="text-xs px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800">
-                        {{ auth()->user()->role?->label ?? auth()->user()->role?->name }}
-                    </span>
+                <!-- User Avatar + Dropdown -->
+                <div class="relative" x-data="{ open: false }">
+                    <button @click.prevent="open = !open" 
+                            @click.outside="open = false"
+                            @scroll.window="open = false"
+                            class="flex items-center gap-3 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full py-1.5 px-3 transition-colors">
 
-                    <form method="POST" action="{{ route('logout') }}" wire:submit.prevent="logout">
-                        @csrf
-                        <button type="submit" class="text-red-600 hover:text-red-700 text-sm font-medium">
-                            Logout
-                        </button>
-                    </form>
+                            <!-- Circular Avatar -->
+                        <div class="w-9 h-9 rounded-full bg-teal-600 text-white flex items-center justify-center font-semibold text-sm uppercase">
+                            {{ substr(auth()->user()->name, 0, 1) }}
+                        </div>
+
+                        <!-- Name -->
+                        <span class="text-sm font-medium text-gray-700 dark:text-gray-300">
+                            {{ auth()->user()->name }}
+                        </span>
+
+                        <!-- Arrow -->
+                        <svg class="w-4 h-4 text-gray-400 transition-transform" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+
+                    <!-- Dropdown -->
+                    <div x-show="open"
+                        x-transition:enter="transition ease-out duration-200"
+                        x-transition:enter-start="opacity-0 scale-95"
+                        x-transition:enter-end="opacity-100 scale-100"
+                        x-transition:leave="transition ease-in duration-150"
+                        x-transition:leave-start="opacity-100 scale-100"
+                        x-transition:leave-end="opacity-0 scale-95"
+                        class="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 py-2 z-50"
+                        style="display: none;">
+
+                        <!-- User Info -->
+                        <div class="px-4 py-3 border-b border-gray-100 dark:border-gray-700">
+                            <div class="text-sm font-semibold text-gray-800 dark:text-white">{{ auth()->user()->name }}</div>
+                            <div class="text-xs text-gray-500 dark:text-gray-400">{{ auth()->user()->email }}</div>
+                        </div>
+
+                        <!-- Edit Profile -->
+                        <a href="{{ route('profile.edit') }}"
+                        class="block px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-teal-50 dark:hover:bg-teal-900/20 hover:text-teal-700 dark:hover:text-teal-300 transition-colors">
+                            Edit Profile
+                        </a>
+
+                        <!-- Settings -->
+                        <a href="{{ route('settings.profile') }}"
+                        class="block px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-teal-50 dark:hover:bg-teal-900/20 hover:text-teal-700 dark:hover:text-teal-300 transition-colors">
+                            Settings
+                        </a>
+
+                        <!-- Divider -->
+                        <div class="border-t border-gray-100 dark:border-gray-700 my-1"></div>
+
+                        <!-- Logout -->
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit"
+                                    class="w-full text-left px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">
+                                Logout
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </header>
 
