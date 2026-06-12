@@ -48,12 +48,35 @@
                 </div>
             </div>
 
-            <nav class="flex-1 p-4">
-                <!-- Sidebar menu will go here later -->
-                <p class="text-xs uppercase tracking-widest text-gray-400 mb-2 px-3">Main</p>
+            <nav class="flex-1 p-4 space-y-1">
+                <p class="text-xs uppercase tracking-widest text-gray-400 mb-3 px-3">Main</p>
+                
+                <!-- Dashboard -->
                 <a href="{{ route('dashboard') }}"
-                   class="flex items-center gap-3 px-4 py-3 rounded-xl bg-cyan-50 text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-300 font-medium">
-                    <span>Dashboard</span>
+                class="flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all
+                        {{ request()->routeIs('dashboard') 
+                            ? 'bg-cyan-50 text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-300 font-semibold' 
+                            : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800' }}">
+                    <span class="text-sm">Dashboard</span>
+                </a>
+
+                <!-- Courses -->
+                <a href="{{ route('student.courses') }}"
+                class="flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all
+                        {{ request()->routeIs('student.courses') 
+                            ? 'bg-cyan-50 text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-300 font-semibold' 
+                            : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800' }}">
+                    <span class="text-sm">Courses</span>
+                </a>
+
+                <!-- Available Courses -->
+                <a href="{{ route('student.available-courses') }}"
+                class="flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all
+                        {{ request()->routeIs('student.available-courses') 
+                            ? 'bg-cyan-50 text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-300 font-semibold' 
+                            : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800' }}">
+                    <span class="text-sm">Available Courses</span>
+                </a>
             </nav>
         </aside>
 
