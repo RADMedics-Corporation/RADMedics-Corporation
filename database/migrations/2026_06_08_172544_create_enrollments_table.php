@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('proof_of_experience')->nullable();
 
             $table->boolean('consent')->default(false);
-
+            $table->unique(['user_id', 'course_id']);
             $table->timestamps();
         });
     }

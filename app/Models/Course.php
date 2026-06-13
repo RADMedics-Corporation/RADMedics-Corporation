@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class Course extends Model
@@ -133,5 +135,34 @@ class Course extends Model
     public function unenroll(User $student): void
     {
         $this->students()->detach($student->id);
+    }
+
+    public function scopeEnrolledByStudent(Builder $query, User $user): void
+    {
+        $enrolledIds = $user->enrolledCourses()->pluck('courses.id');
+
+        $pendingIds = DB::table('enrollments')
+            ->where('user_id', $user->id)
+            ->pluck('course_id');
+
+        $query->whereIn('id', $enrolledIds->merge($pendingIds)->unique());
+    }
+
+    public function scopeTaughtBy(Builder $query, User $user): void
+    {
+        $query->where('instructor_id', $user->id);
+    }
+
+    public function scopeAvailableFor(Builder $query, User $user): void
+    {
+        $query->whereNotIn('id', function ($sub) use ($user) {
+            $sub->select('course_id')
+                ->from('enrollments')
+                ->where('user_id', $user->id);
+        })->whereNotIn('id', function ($sub) use ($user) {
+            $sub->select('course_id')
+                ->from('course_student')
+                ->where('user_id', $user->id);
+        });
     }
 }

@@ -3,24 +3,30 @@
 namespace App\Livewire;
 
 use App\Models\Course;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
-/* use Livewire\WithPagination; */
 
 class CourseList extends Component
 {
-    /* use WithPagination; */
-    public $role = null;
+    public $filter = 'all'; // 'all' | 'enrolled' | 'available'
 
     public function render()
     {
+        $user = Auth::user();
+
         $courses = Course::published()
-                        ->latest('published_at')
-                        ->get();
-        // use ->paginate(<number>) in the future
+            ->latest('published_at')
+            ->when($user && $this->filter === 'enrolled' && $user->hasRole('student'),
+                fn($q) => $q->enrolledByStudent($user))
+            ->when($user && $this->filter === 'available' && $user->hasRole('student'),
+                fn($q) => $q->availableFor($user))
+            ->when($user && $user->hasRole('instructor'),
+                fn($q) => $q->taughtBy($user))
+            ->get();
 
         return view('livewire.course-list', [
             'courses' => $courses,
-            'role' => $this->role,
+            'role' => $user?->role?->name,
         ]);
     }
 }
