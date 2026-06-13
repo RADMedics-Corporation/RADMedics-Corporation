@@ -24,7 +24,8 @@ class AuthenticationTest extends TestCase
         $role = Role::firstOrCreate(['name' => 'student']);
 
         $user = User::factory()->create([
-            'name' => 'Test User',
+            'first_name' => 'Test',
+            'last_name' => 'Example',
             'email' => 'test@example.com',
             'password' => bcrypt('password'),
             'role_id' => $role->id,
@@ -45,7 +46,8 @@ class AuthenticationTest extends TestCase
         $role = Role::firstOrCreate(['name' => 'student']);
 
         $user = User::factory()->create([
-            'name' => 'Test User',
+            'first_name' => 'Test',
+            'last_name' => 'User',
             'email' => 'test@example.com',
             'password' => bcrypt('password'),
             'role_id' => $role->id,
@@ -65,7 +67,8 @@ class AuthenticationTest extends TestCase
         $role = Role::firstOrCreate(['name' => 'student']);
 
         $user = User::factory()->create([
-            'name' => 'Test User',
+            'first_name' => 'Test',
+            'last_name' => 'User',
             'email' => 'test@example.com',
             'password' => bcrypt('password'),
             'role_id' => $role->id,
