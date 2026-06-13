@@ -139,7 +139,9 @@ class Course extends Model
 
     public function scopeEnrolledByStudent(Builder $query, User $user): void
     {
-        $enrolledIds = $user->enrolledCourses()->pluck('courses.id');
+        $enrolledIds = DB::table('course_student')
+            ->where('student_id', $user->id)
+            ->pluck('course_id');
 
         $pendingIds = DB::table('enrollments')
             ->where('user_id', $user->id)
@@ -162,7 +164,7 @@ class Course extends Model
         })->whereNotIn('id', function ($sub) use ($user) {
             $sub->select('course_id')
                 ->from('course_student')
-                ->where('user_id', $user->id);
+                ->where('student_id', $user->id);
         });
     }
 }

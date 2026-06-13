@@ -82,37 +82,8 @@ class User extends Authenticatable
 
     public function enrolledCourses()
     {
-        return $this->belongsToMany(Course::class, 'course_student')
+        return $this->belongsToMany(Course::class, 'course_student', 'student_id', 'course_id')
                     ->withTimestamps();
-    }
-
-    public function scopeEnrolledByStudent(Builder $query, User $user): void
-    {
-        $enrolledIds = $user->enrolledCourses()->pluck('courses.id');
-
-        $pendingIds = DB::table('enrollments')
-            ->where('user_id', $user->id)
-            ->pluck('course_id');
-
-        $query->whereIn('id', $enrolledIds->merge($pendingIds)->unique());
-    }
-
-    public function scopeTaughtBy(Builder $query, User $user): void
-    {
-        $query->where('instructor_id', $user->id);
-    }
-
-    public function scopeAvailableFor(Builder $query, User $user): void
-    {
-        $query->whereNotIn('id', function ($sub) use ($user) {
-            $sub->select('course_id')
-                ->from('enrollments')
-                ->where('user_id', $user->id);
-        })->whereNotIn('id', function ($sub) use ($user) {
-            $sub->select('course_id')
-                ->from('course_student')
-                ->where('user_id', $user->id);
-        });
     }
 
     public function getEnrolledCoursesCountAttribute(): int

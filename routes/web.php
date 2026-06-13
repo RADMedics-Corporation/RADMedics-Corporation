@@ -49,8 +49,8 @@ Route::middleware(['auth'])->group(function () {
         return view('pages.profile');
     })->name('profile.edit');
 
-    Route::view('/dashboard/courses', 'pages.student.courses')->name('student.courses');
-    Route::view('/dashboard/available-courses', 'pages.student.available-courses')->name('student.available-courses');
+    Route::view('/dashboard/my-courses', 'pages.student.courses')->name('student.courses');
+    Route::view('/dashboard/courses', 'pages.student.available-courses')->name('student.available-courses');
 
     Route::redirect('settings', 'settings/profile');
 
