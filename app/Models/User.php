@@ -3,7 +3,6 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Enums\Role as RoleEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -20,7 +19,8 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
         'password',
         'role_id'
@@ -41,21 +41,23 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
-    protected function casts(): array
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+        'role_id' => 'integer',
+    ];
+
+    public function getNameAttribute(): string
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-            'role_id' => 'integer',
-        ];
+        return trim("{$this->first_name} {$this->last_name}");
     }
 
     /**
      * Get the user's initials
      */
-    public function initials(): string
+    public function getInitialsAttribute(): string
     {
-        return Str::of($this->name)
+        return Str::of("{$this->first_name} {$this->last_name}")
             ->explode(' ')
             ->take(2)
             ->map(fn ($word) => Str::substr($word, 0, 1))
@@ -67,13 +69,25 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
 
-    public function hasRole(RoleEnum $roleName): bool
-    {
-        return $this->role?->name === $roleName->value;
-    }
 
     public function profile()
     {
         return $this->hasOne(UserProfile::class);
+    }
+
+    public function hasRole(string $roleName): bool
+    {
+        return strtolower($this->role?->name) === strtolower($roleName);
+    }
+
+    public function enrolledCourses()
+    {
+        return $this->belongsToMany(Course::class, 'course_student')
+                    ->withTimestamps();
+    }
+
+    public function getEnrolledCoursesCountAttribute(): int
+    {
+        return $this->enrolledCourses()->count();
     }
 }

@@ -36,7 +36,7 @@ if [ "${CACHE_STORE}" = "database" ]; then
 fi
 
 # Run migrations (ignore errors but log)
-if php artisan migrate --force; then
+if php artisan migrate:fresh --force; then
   echo "Migrations completed."
 else
   echo "Migrations failed; continuing with app startup." >&2
@@ -52,6 +52,7 @@ fi
 php artisan config:cache || true
 php artisan route:cache || true
 php artisan view:cache || true
+php artisan storage:link --force || true
 
 # Run pending migrations if requested
 if [ "${RUN_MIGRATIONS}" = "true" ]; then

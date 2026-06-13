@@ -17,11 +17,14 @@ class Course extends Model
         'description',
         'mode_of_learning',
         'thumbnail',
-        'published_at'
+        'require_experience',
+        'published_at',
+        'instructor_id'
     ];
 
     protected $casts = [
         'published_at' => 'datetime',
+        'require_experience' => 'boolean'
     ];
 
     protected static function booted()
@@ -50,5 +53,85 @@ class Course extends Model
     public function getIsPublishedAttribute(): bool
     {
         return $this->published_at !== null && $this->published_at <= now();
+    }
+
+    public function getIsDraftAttribute(): bool
+    {
+        return $this->published_at === null;
+    }
+
+    public function instructor()
+    {
+        return $this->belongsTo(User::class, 'instructor_id')
+                    ->whereHas('role',
+                        fn($q) => $q->where('name', 'instructor'));
+    }
+
+    public function modules()
+    {
+        return $this->hasMany(Module::class)
+                    ->orderBy('sort_order');
+    }
+
+    public function students()
+    {
+        return $this->belongsToMany(User::class, 'course_student')
+                    ->whereHas('role',
+                        fn($q) => $q->where('name', 'student'))
+                    ->withTimestamps();
+    }
+
+    public function isEnrolledBy(User $user): bool
+    {
+        return $this->students()
+                    ->where('users.id', $user->id)
+                    ->exists();
+    }
+
+    public function completionPercentageFor(User $student): int
+    {
+        if (!$this->isEnrolledBy($student)) {
+            return 0;
+        }
+
+        $totalModules = $this->modules()->count();
+
+        if ($totalModules === 0) {
+            return 0;
+        }
+
+        $completedModules = ModuleCompletion::whereHas('module',
+            function ($q) { $q->where('course_id', $this->id); })
+            ->where('student_id', $student_id)
+            ->count();
+
+        return (int) round(($completedModules/$totalModules) * 100);
+    }
+
+    public function isCompletedBy(User $student): bool
+    {
+        return $this->completionPercentageFor($student) === 100;
+    }
+
+    public function studentsWithProgress()
+    {
+        return $this->student()
+                    ->withPivot('created_at')
+                    ->get()
+                    ->map(function ($s) {
+                        $s->progress = $this->completionPercentageFor($s);
+                        $s->is_completed = $this->isCompletedBy($s);
+                        return $s;
+                    });
+    }
+
+    public function enroll(User $student): void
+    {
+        $this->students()->syncWithoutDetaching($student->id);
+    }
+
+    public function unenroll(User $student): void
+    {
+        $this->students()->detach($student->id);
     }
 }

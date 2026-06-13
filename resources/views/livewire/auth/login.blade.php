@@ -70,10 +70,10 @@
         </button>
     </form>
 
-    @if (Route::has('register'))
+    @if (Route::has('enroll'))
         <div class="text-center text-sm text-white/70 mt-4">
             Don't have an account?
-            <a href="{{ route('register') }}" wire:navigate class="text-blue-400 hover:text-blue-300 font-medium">Sign up</a>
+            <a href="{{ route('enroll') }}" wire:navigate class="text-blue-400 hover:text-blue-300 font-medium">Enroll</a>
         </div>
     @endif
 </div>
