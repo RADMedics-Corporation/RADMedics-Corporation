@@ -11,18 +11,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_profiles', function (Blueprint $table) {
+        Schema::create('enrollments', function (Blueprint $table) {
             $table->id();
 
             $table->foreignId('user_id')
                   ->constrained()
                   ->onDelete('cascade');
 
-            $table->string('picture')->nullable(); // file path
-            $table->enum('gender', ['male', 'female', 'nonbinary'])->nullable();
-            $table->string('phone')->nullable();
-            $table->date('birthdate')->nullable();
-            $table->string('address')->nullable();
+            $table->foreignId('course_id')
+                  ->constrained()
+                  ->onDelete('cascade');
+
+            //file paths
+            $table->string('proof_of_payment');
+            $table->string('proof_of_experience')->nullable();
+
+            $table->boolean('consent')->default(false);
+
             $table->timestamps();
         });
     }
@@ -32,6 +37,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_profiles');
+        Schema::dropIfExists('enrollments');
     }
 };

@@ -32,6 +32,7 @@
         }
     </script>
     <script src="//unpkg.com/alpinejs" defer></script>
+    @livewireStyles
 </head>
 <body class="bg-gray-50 dark:bg-gray-950 min-h-screen">
 
@@ -89,5 +90,6 @@
             </main>
         </div>
     </div>
+    @livewireScripts
 </body>
 </html>

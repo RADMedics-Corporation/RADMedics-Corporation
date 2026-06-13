@@ -4,6 +4,7 @@ use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
 use App\Livewire\Auth\Login;
+use App\Livewire\EnrollmentPage;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -16,6 +17,7 @@ Route::view('/about', 'pages.about')->name('about');
 Route::view('/courses', 'pages.courses')->name('courses');
 Route::view('/updates', 'pages.updates')->name('updates');
 Route::view('/contact', 'pages.contact')->name('contact');
+Route::get('/enroll', EnrollmentPage::class)->name('enroll');
 Route::view('/faqs', 'pages.faqs')->name('faqs');
 Route::view('/privacy-policy', 'pages.privacy-policy')->name('privacy-policy');
 Route::view('/terms-of-service', 'pages.terms-of-service')->name('terms-of-service');

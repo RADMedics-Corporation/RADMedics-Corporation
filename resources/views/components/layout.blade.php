@@ -31,6 +31,7 @@
         }
     </script>
     <script src="//unpkg.com/alpinejs" defer></script>
+    @livewireStyles
 </head>
 <body class="bg-white flex flex-col min-h-screen">
     <x-layouts.navbar :variant="$navbarVariant" />
@@ -38,5 +39,6 @@
         {{ $slot }}
     </main>
     @include('components.layouts.footer')
+    @livewireScripts
 </body>
 </html>
